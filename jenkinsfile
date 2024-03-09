@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+    
+    environment {
+        TF_VERSION = "0.15.5" // Specify the Terraform version you want to use
+        //AWS_DEFAULT_REGION = "us-east-1" // Specify the AWS region
+        //TF_VAR_instance_type = "t2.micro" // Specify the instance type
+        //TF_VAR_ami = "ami-0c55b159cbfafe1f0" // Specify the AMI ID
+        //TF_VAR_key_name = "your-key-pair-name" // Specify the name of your SSH key pair
+        //TF_VAR_subnet_id = "subnet-1234567890abcdef0" // Specify the subnet ID
+        //TF_VAR_security_group_id = "sg-1234567890abcdef0" // Specify the security group ID
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                 git url: 'https://github.com/MahadevDevops/jenkins-poc.git'
+            }
+        }
+        
+        stage('Terraform Init') {
+            steps {
+                script {
+                    sh "curl -LO https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
+                    sh "unzip terraform_${TF_VERSION}_linux_amd64.zip"
+                    sh "./terraform init"
+                }
+            }
+        }
+        
+        stage('Terraform Plan') {
+            steps {
+                script {
+                    sh "./terraform plan -out=tfplan"
+                }
+            }
+        }
+        
+        stage('Terraform Apply') {
+            steps {
+                script {
+                    sh "./terraform apply -auto-approve tfplan"
+                }
+            }
+        }
+    }
+    
+    /*
+    post {
+        always {
+            script {
+                sh "./terraform destroy -auto-approve" // Destroy the created resources after use
+            }
+        }
+    }
+    */
+}
