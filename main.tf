@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "example" {
-  ami           = "ami-08f5f3cd3a44fc3c4" // Specify the Windows AMI ID
+  ami           = "ami-05c969369880fa2c2" // Specify the Windows AMI ID
   instance_type = "t2.micro" // Specify the instance type
 
   tags = {
@@ -21,9 +21,7 @@ resource "aws_instance" "example" {
 
   // Optionally, you can specify the user data for customization
   user_data = <<-EOF
-    <powershell>
-      # Insert your PowerShell commands here
-      Write-Host "Hello, Windows!"
-    </powershell>
+    #!/bin/bash
+    echo "Hello, Linux!"
   EOF
 }
