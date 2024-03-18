@@ -7,7 +7,7 @@ resource "aws_instance" "example" {
   instance_type = "t2.micro" // Specify the instance type
 
   tags = {
-    Name = "windows-instance"
+    Name = "Linux-instance"
   }
 
   // Specify the key pair name for SSH access
