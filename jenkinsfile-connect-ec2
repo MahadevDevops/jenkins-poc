@@ -15,6 +15,7 @@ pipeline {
                 sh """ ssh -tt -i $SECRET_FILE -o StrictHostKeyChecking=no ubuntu@`terraform output -raw ec2_public_IP` << EOF 
                 cd /home/ubuntu
                 docker
+                sudo mkdir jenkins 
                 ls -ll
                 exit
                 EOF"""
