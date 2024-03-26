@@ -2,6 +2,7 @@ pipeline {
     agent any
     
     environment {
+        ec2_ip = "DEFAULT"
         TF_VERSION = "0.15.5" // Specify the Terraform version you want to use
         //AWS_DEFAULT_REGION = "us-east-1" // Specify the AWS region
         //TF_VAR_instance_type = "t2.micro" // Specify the instance type
