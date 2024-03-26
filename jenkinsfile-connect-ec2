@@ -15,7 +15,8 @@ pipeline {
                 sh "terraform output -raw ec2_public_IP"
                 sh """
                     ssh -i $SECRET_FILE -o StrictHostKeyChecking=no ubuntu@`terraform output -raw ec2_public_IP`
-                    docker --version
+                    cd /home/ubuntu
+                    ls -ll
                 """ 
             }
         }
