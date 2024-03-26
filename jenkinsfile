@@ -41,12 +41,7 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 script {
-                    sh """
-                       terraform apply -auto-approve tfplan
-                       export ec2_ip=`terraform output ec2_public_IP`
-                       echo Created ec2 Public IP: '${ec2_ip}'
-                    """
-                    //sh "./terraform apply -auto-approve tfplan"
+                    sh "./terraform apply -auto-approve tfplan"
                     //def ec2_ip = sh  "./terraform output ec2_public_IP"
                     //sh "ec2_ip=${./terraform output ec2_public_IP"
                     //echo "Created ec2 Public IP: $ec2_ip"
