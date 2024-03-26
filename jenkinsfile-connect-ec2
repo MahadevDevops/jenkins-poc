@@ -13,7 +13,8 @@ pipeline {
                 echo "Get the public ip of ec2"
                 sh "terraform init"
                 sh """ ssh -tt -i $SECRET_FILE -o StrictHostKeyChecking=no ubuntu@`terraform output -raw ec2_public_IP` << EOF 
-                docker run --name nginx -d nginx
+                sudo service docker start
+                sudo docker run --name nginx -d nginx
                 exit
                 EOF"""
             }
