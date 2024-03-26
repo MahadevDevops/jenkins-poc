@@ -6,7 +6,7 @@ pipeline {
         SECRET_FILE = credentials("poc-pem")
         remoteCommands =
            """pwd;
-              docker run --name nginx -d nginx """
+              sudo docker run --name nginx -d nginx """
        
     }
     
