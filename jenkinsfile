@@ -25,7 +25,7 @@ pipeline {
                 script {
                    // sh "curl -LO https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
                     //sh "unzip -f terraform_${TF_VERSION}_linux_amd64.zip"
-                    sh "terraform init"
+                    sh "terraform init -reconfigure"
                 }
             }
         }
