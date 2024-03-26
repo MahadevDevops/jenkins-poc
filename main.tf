@@ -35,6 +35,11 @@ resource "aws_instance" "example" {
     #Install Docker
     # Add Docker's official GPG key:
     sudo apt-get update -y
+    #install aws cli
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    sudo apt install unzip -y
+    unzip awscliv2.zip
+    sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
     sudo apt-get install ca-certificates curl -y
     sudo install -m 0755 -d /etc/apt/keyrings
     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
