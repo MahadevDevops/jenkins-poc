@@ -12,7 +12,7 @@ pipeline {
                 <h2>Hello from Nginx container of jenkins poc</h2>
               </body>
               </html>
-              `EOT;
+              `EOT';
               sudo mkdir web;
               sudo cp index.html web;
               sudo docker kill nginx || true;
