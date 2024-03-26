@@ -23,9 +23,9 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 script {
-                    sh "curl -LO https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
-                    sh "unzip -f terraform_${TF_VERSION}_linux_amd64.zip"
-                    sh "./terraform init"
+                   // sh "curl -LO https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
+                    //sh "unzip -f terraform_${TF_VERSION}_linux_amd64.zip"
+                    sh "terraform init"
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 script {
-                    sh "./terraform plan -out=tfplan"
+                    sh "terraform plan -out=tfplan"
                 }
             }
         }
@@ -42,8 +42,8 @@ pipeline {
             steps {
                 script {
                     sh """
-                      ./terraform apply -auto-approve tfplan
-                       ec2_ip=./terraform output ec2_public_IP
+                      terraform apply -auto-approve tfplan
+                       ec2_ip=$(terraform output ec2_public_IP)
                        echo Created ec2 Public IP: $ec2_ip
                     """
                     //sh "./terraform apply -auto-approve tfplan"
