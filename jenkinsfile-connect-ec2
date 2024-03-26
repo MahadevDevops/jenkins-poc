@@ -15,7 +15,7 @@ pipeline {
                 sh """ ssh -tt -i $SECRET_FILE -o StrictHostKeyChecking=no ubuntu@`terraform output -raw ec2_public_IP` << EOF 
                 set -x
                 #sudo service docker start
-                sudo docker run --name nginx -d nginx
+                sudo docker run --name nginx -d nginx </dev/null >/var/log/root-backup.log 2>&1 &
                 exit
                 EOF"""
             }
