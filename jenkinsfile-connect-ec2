@@ -6,13 +6,13 @@ pipeline {
         SECRET_FILE = credentials("poc-pem")
         remoteCommands =
            """pwd;
-              sudo cat <<EOF >> index.html
+              cat <<EOT >> index.html
               <html lang="en">
               <body>
                 <h2>Hello from Nginx container of jenkins poc</h2>
               </body>
               </html>
-              EOF;
+              EOT;
               sudo mkdir web;
               sudo cp index.html web;
               sudo docker kill nginx || true;
