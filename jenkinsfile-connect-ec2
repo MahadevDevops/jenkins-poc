@@ -6,17 +6,7 @@ pipeline {
         SECRET_FILE = credentials("poc-pem")
         remoteCommands =
            """pwd;
-              cat <<EOT >> index.html
-              <html lang="en">
-              <body>
-                <h2>Hello from Nginx container of jenkins poc</h2>
-              </body>
-              </html>
-              `EOT';
-              sudo mkdir web;
-              sudo cp index.html web;
-              sudo docker kill nginx || true;
-              sudo docker run --name nginx -v web:/usr/share/nginx/html -d nginx;
+              sudo docker run --name nginx -v /home/ubuntu/web:/usr/share/nginx/html -d nginx;
               sudo docker ps
               """
        
