@@ -3,6 +3,7 @@ pipeline {
     
     environment {
         TF_VERSION = "0.15.5" // Specify the Terraform version you want to use
+        SECRET_FILE = credentials("poc-pem")
        
     }
     
@@ -11,7 +12,8 @@ pipeline {
             steps {
                 echo "Get the public ip of ec2"
                 sh "terraform init"
-                sh "terraform output ec2_public_IP"
+                sh "terraform output -raw ec2_public_IP"
+                sh "ssh -i $SECRET_FILE -o StrictHostKeyChecking=no ubuntu@`terraform output -raw ec2_public_IP`" 
                
             }
         }
