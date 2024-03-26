@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_instance" "example" {
   ami           = "ami-05c969369880fa2c2" // Specify the Linux AMI ID
   instance_type = "t2.micro" // Specify the instance type
-
+  iam_instance_profile = "ec2-role-poc"
   tags = {
     Name = "Linux-instance"
   }
