@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+    
+    environment {
+        TF_VERSION = "0.15.5" // Specify the Terraform version you want to use
+       
+    }
+    
+    stages {
+        stage('Connect-ec2') {
+            steps {
+               
+            }
+        }
+
+    }
+    
+
+}
