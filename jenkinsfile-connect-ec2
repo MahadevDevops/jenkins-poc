@@ -10,8 +10,8 @@ pipeline {
               sudo docker rm nginx || true;
               sudo docker run --name nginx -p 80:80 -v /home/ubuntu/web:/usr/share/nginx/html -d nginx;
               sudo docker ps;
+              sudo docker commit `sudo docker ps -aqf "name=containername"`  nginx:v1;
               sudo aws ecr get-login-password --region us-west-1 | sudo docker login --username AWS --password-stdin 198250129392.dkr.ecr.us-west-1.amazonaws.com;
-              sudo docker commit nginx  nginx:v1;
               sudo docker tag nginx:v1 198250129392.dkr.ecr.us-west-1.amazonaws.com/nginx:v1;
               sudo docker push 198250129392.dkr.ecr.us-west-1.amazonaws.com/nginx:v1"""
        
