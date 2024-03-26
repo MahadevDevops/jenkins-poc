@@ -14,6 +14,7 @@ pipeline {
                 sh "terraform init"
                 sh """ ssh -tt -i $SECRET_FILE -o StrictHostKeyChecking=no ubuntu@`terraform output -raw ec2_public_IP` << EOF 
                 cd /home/ubuntu
+                docker
                 ls -ll
                 exit
                 EOF"""
