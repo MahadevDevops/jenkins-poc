@@ -8,17 +8,24 @@ pipeline {
     }
     
     stages {
+         stage('Checkout') {
+            steps {
+                checkout scm
+                 //git url: 'https://github.com/MahadevDevops/jenkins-poc.git'
+            }
+        }
         stage('Connect-ec2') {
             steps {
                 echo "Get the public ip of ec2"
                 sh "terraform init"
-                sh """ ssh -tt -i $SECRET_FILE -o StrictHostKeyChecking=no ubuntu@`terraform output -raw ec2_public_IP` << EOF 
-                #set -x
-                #sudo service docker start
-                sudo docker run --name nginx -d nginx < /dev/null > /dev/null 2>&1 
-                sudo docker ps < /dev/null > /dev/null 2>&1 
-                exit
-                EOF"""
+                sh 'ssh -t -t -i $SECRET_FILE -o StrictHostKeyChecking=no ubuntu@`terraform output -raw ec2_public_IP` "echo pwd && sudo -i -u root && docker run --name nginx -d nginx"'
+                //sh """ ssh -tt -i $SECRET_FILE -o StrictHostKeyChecking=no ubuntu@`terraform output -raw ec2_public_IP` << EOF 
+                //set -x
+                //sudo service docker start
+                //sudo docker run --name nginx -d nginx < /dev/null > /dev/null 2>&1 
+                //sudo docker ps < /dev/null > /dev/null 2>&1 
+                //exit
+                //EOF"""
             }
         }
 
