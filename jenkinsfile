@@ -43,7 +43,7 @@ pipeline {
                 script {
                     sh """
                        terraform apply -auto-approve tfplan
-                       ec2_ip=$(terraform output ec2_public_IP)
+                       ec2_ip=${terraform output ec2_public_IP}
                        echo Created ec2 Public IP: $ec2_ip
                     """
                     //sh "./terraform apply -auto-approve tfplan"
