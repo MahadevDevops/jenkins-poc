@@ -10,6 +10,7 @@ pipeline {
         stage('Connect-ec2') {
             steps {
                 echo "Get the public ip of ec2"
+                sh "terraform init"
                 sh "terraform output ec2_public_IP"
                
             }
