@@ -16,7 +16,7 @@ pipeline {
                 set -x
                 #sudo service docker start
                 sudo nohup docker run --name nginx -d nginx < /dev/null > /dev/null 2>&1 &
-                sudo docker ps
+                sudo docker ps < /dev/null > /dev/null 2>&1 &
                 exit
                 EOF"""
             }
