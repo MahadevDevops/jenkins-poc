@@ -23,6 +23,15 @@ resource "aws_instance" "example" {
   user_data = <<-EOF
     #!/bin/bash
     echo "Hello, Linux!"
+    # adding index html file
+    sudo mkdir -p /home/ubuntu/web
+    cat <<EOT >> /home/ubuntu/web/index.html
+     <html lang="en">
+     <body>
+       <h2>Hello from Nginx container of jenkins poc</h2>
+     </body>
+     </html>
+    EOT
     #Install Docker
     # Add Docker's official GPG key:
     sudo apt-get update -y
