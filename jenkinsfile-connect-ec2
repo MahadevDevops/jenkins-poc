@@ -17,7 +17,7 @@ pipeline {
               sudo docker tag nginx-custom-aws 198250129392.dkr.ecr.us-west-1.amazonaws.com/jenkins-poc-registry1:nginx-custom-aws;
               sudo docker push 198250129392.dkr.ecr.us-west-1.amazonaws.com/jenkins-poc-registry1:nginx-custom-aws
               echo Pushing the image to Jfrog;
-              sudo docker login -u ajitgarad333@gmail.com -p "${jpass}"  mahadevgarad.jfrog.io;
+              sudo docker login -u ajitgarad333@gmail.com -p cmVmdGtuOjAxOjE3NDMwNTQ5MjY6MWRjd2Z0V1JxMENjdmN6Q0xIMGxXbmxjelhv  mahadevgarad.jfrog.io;
               sudo docker tag nginx-custom-aws mahadevgarad.jfrog.io/jenkins-poc-docker/nginx-custom-jfrog:latest;
               sudo docker push mahadevgarad.jfrog.io/jenkins-poc-docker/nginx-custom-jfrog:latest"""
        
