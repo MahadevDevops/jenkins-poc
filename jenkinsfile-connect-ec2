@@ -6,7 +6,7 @@ pipeline {
         SECRET_FILE = credentials("poc-pem")
         remoteCommands =
            """pwd;
-              sudo service docker start
+              sudo service docker start;
               sudo docker kill nginx || true;
               sudo docker rm nginx || true;
               sudo docker run --name nginx -p 80:80 -v /home/ubuntu/web:/usr/share/nginx/html -d nginx;
