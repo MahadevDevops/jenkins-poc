@@ -19,7 +19,9 @@ pipeline {
               echo Pushing the image to Jfrog;
               sudo docker login -u ajitgarad333@gmail.com -p cmVmdGtuOjAxOjE3NDMwNTQ5MjY6MWRjd2Z0V1JxMENjdmN6Q0xIMGxXbmxjelhv  mahadevgarad.jfrog.io;
               sudo docker tag nginx-custom-aws mahadevgarad.jfrog.io/jenkins-poc-docker/nginx-custom-jfrog:latest;
-              sudo docker push mahadevgarad.jfrog.io/jenkins-poc-docker/nginx-custom-jfrog:latest"""
+              sudo docker push mahadevgarad.jfrog.io/jenkins-poc-docker/nginx-custom-jfrog:latest
+              echo Running the ZAP;
+              sudo docker run -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://`curl http://169.254.169.254/latest/meta-data/local-ipv4` gen.conf -r testreport.html"""
        
     }
     
